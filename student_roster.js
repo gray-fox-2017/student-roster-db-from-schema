@@ -113,8 +113,8 @@ class Student{
       });
     }
 
-    Help(){
-      console.log("=====================How To Use=====================");
+    help(){
+      console.log("==========================How To Use============================");
       console.log("[1]. student.addData(first_name,last_name,gender,birthdate,email,phone)");
       console.log("[2]. student.editData(first_name,last_name,gender,birthdate,email,phone,id)");
       console.log("[3]. student.deleteData(id)");
