@@ -134,7 +134,7 @@ class Student {
     console.log(`\n4) Delete Student:\nstudent.deleteData(<id>)\n`);
     console.log(`\n5) Search Student by name:\nstudent.name(<"name">)\n`);
     console.log(`\n6) Search Student by attribute:\nstudent.attribute(<collumn_name>,<"collumn_value">)`);
-    console.log(`\n7) Search Student by birthday this month:\nstudent.birthday()\n`);
+    console.log(`\n7) Search Students who has birthday this month:\nstudent.birthday()\n`);
     console.log(`\n8) Sort Students by birthday date:\nstudent.sortbirthday()\n`);
     console.log(`\n9) Help Command:\nstudent.help()\n`);
   }
