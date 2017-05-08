@@ -43,3 +43,5 @@ let seedData = () =>{
 
 replServer.context.BikinTable = BikinTable;
 replServer.context.seedData = seedData;
+
+// Akan KEtemu Undifined karena function yang di panggil tidak ada return;
