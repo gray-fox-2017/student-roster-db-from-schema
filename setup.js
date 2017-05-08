@@ -8,7 +8,7 @@ const repl = require('repl');
 let REPLServer = repl.start({prompt : '> '});
 
 //SQL Statement
-var CREATE_TABLE = "CREATE TABLE IF NOT EXISTS students ( id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT NOT NULL, lastname TEXT, birthdate DATE);";
+var CREATE_TABLE = "CREATE TABLE students ( id INTEGER PRIMARY KEY AUTOINCREMENT, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100), birthdate DATE, email VARCHAR(100), phone VARCHAR);";
 var SEED_DATA = "INSERT INTO students (firstname, lastname, birthdate) VALUES ('Rubi', 'Henjaya', '1986-11-20'), ('Riza','Fahmi','1983-12-3');";
 
 //CREATE_TABLE
