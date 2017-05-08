@@ -59,8 +59,9 @@ class Student {
         console.log(err);
       }
       else {
+        console.log(`\nStudent List:`);
         rows.forEach((data)=>{
-        console.log(`\nStudent List:\n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
+        console.log(`\n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
         })
       }
     })
@@ -73,22 +74,24 @@ class Student {
         console.log(err);
       }
       else{
+        console.log(`\nSearch by name results:`);
         rows.forEach((data)=>{
-          console.log(`\nSearch by name results:\n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
+          console.log(`\n${data.id} | ${data.firstname} | ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
         })      
       }
     })
   }
   
-  static birthday(month){
-    let query = `SELECT * from student where strftime('%m', birthday) = "${month}"`
+  static birthday(){
+    let query = `SELECT * FROM student where strftime('%m', birthday) = strftime('%m', 'now')`
     db.all(query,function(err,rows){
       if(err){
         console.log(err);
       }
       else{
+        console.log(`\n${rows.length} students have birthday this month`);
         rows.forEach((data)=>{
-          console.log(`\n${rows.length} students have birthday this month \n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
+          console.log(`\n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
         })
       }
     })
@@ -109,14 +112,15 @@ class Student {
   }
   
   static sortbirthday(){
-    let query = `SELECT * FROM student ORDER by strftime('%m', birthday);`
+    let query = `SELECT id, firstname, lastname, gender, email, phone ,strftime('%m.%d', birthday) as birthday from student order by birthday`;
     db.all(query, function(err,rows){
       if(err){
         console.log(err);
       }
       else{
+        console.log(`\nShow Students sort by birthday date:`);
         rows.forEach((data)=>{
-          console.log(`\nShow Students sort by birthday date:\n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
+          console.log(`\n${data.id} | ${data.firstname}| ${data.lastname} | ${data.gender} | ${data.birthday} | ${data.email} | ${data.phone}`);
         })
       }
     })
@@ -130,7 +134,7 @@ class Student {
     console.log(`\n4) Delete Student:\nstudent.deleteData(<id>)\n`);
     console.log(`\n5) Search Student by name:\nstudent.name(<"name">)\n`);
     console.log(`\n6) Search Student by attribute:\nstudent.attribute(<collumn_name>,<"collumn_value">)`);
-    console.log(`\n7) Search Student by birthday month:\nstudent.birthday("month")\n`);
+    console.log(`\n7) Search Student by birthday this month:\nstudent.birthday()\n`);
     console.log(`\n8) Sort Students by birthday date:\nstudent.sortbirthday()\n`);
     console.log(`\n9) Help Command:\nstudent.help()\n`);
   }
