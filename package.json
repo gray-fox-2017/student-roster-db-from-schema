@@ -1,0 +1,22 @@
+{
+  "name": "student-roster",
+  "version": "0.0.0",
+  "description": "student roster",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gray-fox-2017/student-roster-db-from-schema.git"
+  },
+  "author": "erwinwahyura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gray-fox-2017/student-roster-db-from-schema/issues"
+  },
+  "homepage": "https://github.com/gray-fox-2017/student-roster-db-from-schema#readme",
+  "dependencies": {
+    "sqlite3": "^3.1.8"
+  }
+}
