@@ -1,0 +1,22 @@
+{
+  "name": "student-roster-db-from-schema",
+  "version": "1.0.0",
+  "description": "Create the student database in Javascript REPL",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gray-fox-2017/student-roster-db-from-schema.git"
+  },
+  "author": "sahbanagold <sahbanalo@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gray-fox-2017/student-roster-db-from-schema/issues"
+  },
+  "homepage": "https://github.com/gray-fox-2017/student-roster-db-from-schema#readme",
+  "dependencies": {
+    "sqlite3": "^3.1.8"
+  }
+}
