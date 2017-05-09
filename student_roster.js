@@ -35,7 +35,7 @@ class Student{
   }
 
   updateStudent(id, kategoryDataBaru, dataBaru) {
-    let queryUpdate = `UPDATE student SET ${kategoryDataBaru} = '${dataBaru}' WHERE id = ${id}`
+    let queryUpdate = `UPDATE student SET ${kategoryDataBaru} = '${dataBaru}' WHERE id = '${id}'`
     db.serialize(function () {
       db.run(queryUpdate, function(err) {
         if (err) {
