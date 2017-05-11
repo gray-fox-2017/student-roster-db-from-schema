@@ -22,6 +22,7 @@ class Student {
       });
     });
   }
+
   all(query) {
     db.serialize(function() {
       db.all(query, (err, rows) => {
@@ -29,6 +30,7 @@ class Student {
       });
     });
   }
+
   add(firstname, lastname, gender, birthday, email, phone) {
     let query = `INSERT INTO student (first_name,last_name,gender,birthday,email,phone) VALUES ('${firstname}','${lastname}','${gender}','${birthday}','${email}','${phone}')`;
     this.run(query);
@@ -90,4 +92,3 @@ class Student {
 }
 
 replServer.context.student = new Student;
-
