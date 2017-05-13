@@ -6,22 +6,30 @@ const file = 'student.db';
 let db = new sqlite.Database(file);
 let {createTable, seedData} = require('./setup.js');
 
-let replServer = repl.start();
+let replServer = repl.start({
+  prompt: '>> ',
+  input: process.stdin,
+  output: process.stdout
+})
+
 
 class Student {
-  constructor() {}
+  constructor() {
+  }
   runQuery(query,tugas='',hasReturn = false) {
     db.serialize(function() {
       if (hasReturn) {
         db.all(query, (err, rows) => {
-          if (err) console.log(err)
-          else{
-            if (rows.length > 0) rows.forEach((x) => { console.log([x.id,x.first_name+' '+x.last_name, x.gender,x.birthdate,x.email,x.PHONE].join('|'));});
-            else console.log('No data');
-          }
-
+          rows.forEach((x) => {
+            console.log([x.first_name+' '+x.last_name, x.gender,x.birthdate,x.email,x.PHONE]);
+          })
         });
-      } else db.run(query,(err)=>{ if(!err) console.log('Success to '+tugas);})
+      } else {
+        db.run(query,(err)=>{
+          if(!err) console.log('Success to '+tugas);
+        })
+      }
+      // stmt.finalize();
     });
   }
   add(firstname,lastname,gender,birthdate,email,phone){
@@ -34,6 +42,7 @@ class Student {
   }
   update(id,firstname,lastname,gender,birthdate,email,phone) {
     let query = `UPDATE student SET first_name = '${firstname}', last_name='${lastname}',gender='${gender}',email='${email}',phone='${phone}', birthdate = '${birthdate}' WHERE id = ${id}`;
+    // console.log(query);
     this.runQuery(query,'UPDATE');
   }
   delete(id){
@@ -59,8 +68,11 @@ class Student {
         default : temp = `${temp[0]} = '${temp[1]}'`; break;
       }
       where.push(temp);
+
     }
     query+= where.join(' AND ');
+
+    console.log(query);
     this.runQuery(query,'read',true);
   }
 }
@@ -84,17 +96,19 @@ class Controller {
     this._model.delete(id);
   }
   read (name = '') {
-    if (name === '') this._model.readAll();
+    let res = [];
+    if (name === '') res = this._model.readAll();
     else{
       let arr = ['name:'+name];
-      this._model.filterDt(arr);
+      res  = this._model.filterDt(arr);
     }
   }
   filterDt(str) {
-    this._model.filterDt(str.split(' '));
+    let res = this._model.filterDt(str.split(' '));
   }
+
   birthdaySort(datas) {
-    this._model.birthdaySort('');
+    this._model.birthdaySort("");
   }
   birthdayMonth() {
     this._model.birthdaySort('birthdate');
@@ -102,17 +116,19 @@ class Controller {
 }
 
 class UI {
-  constructor() {}
+  constructor() {
+
+  }
   showHelp() {
     console.log('HELP');
-    console.log('1. student.add(firstname,lastname,gender,birthdate,email,phone)');
-    console.log('2. student.update(id,firstname,lastname,gender,birthdate,email,phone');
-    console.log('3. student.delete(id)');
-    console.log('4. student.read()');
-    console.log('5. student.read(searchname)');
-    console.log('6. student.filterDt("first_name:poppy last_name:sari gender:F")');
-    console.log('7. student.birthdayMonth()'); //currmonth
-    console.log('8. student.birthdaySort()') //abaikan tahun
+    console.log('1. add(firstname,lastname,gender,birthdate,email,phone)');
+    console.log('2. update(id,firstname,lastname,gender,birthdate,email,phone');
+    console.log('3. delete(id)');
+    console.log('4. read()');
+    console.log('5. read(searchname)');
+    console.log('6. filterDt("first_name:poppy last_name:sari gender:F")');
+    console.log('7. birthdayMonth()'); //currmonth
+    console.log('8. birthdaySort()') //abaikan tahun
   }
 }
 
