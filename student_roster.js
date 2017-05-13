@@ -56,13 +56,14 @@ class Student {
 
   showName(name) {
     let query = `SELECT * FROM student
-    WHERE first_name = '${name}' OR last_name = '${name}';`;
+    WHERE UPPER(first_name) = '${name.toUpperCase()}' OR UPPER(last_name) = '${name.toUpperCase()}';`;
     this.all(query);
   }
 
   findAttribute(attribute, value) {
     let query = `SELECT * FROM student
-    WHERE ${attribute} = '${value}';`;
+    WHERE ${attribute} LIKE '${value}';`;
+    //WHERE ${attribute} = '${value}';`;
     this.all(query);
   }
 
