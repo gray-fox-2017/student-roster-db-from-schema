@@ -81,14 +81,14 @@ class Student {
 
   help () {
     console.log(`DOCUMENTATION \n
-    student.add(firstname, lastname, gender, birthday, email, phone) -> to add a student record to the database. \n
-    student.update(id, firstname, lastname, gender, birthday, email, phone) -> to update data in the student record. \n
-    student.delete(id) -> delete data of the student. \n
-    student.showTable() -> show the database. \n
-    student.showName(name) -> show the data of some students with the same name (either last or first name). \n
-    student.findAttribute(attribute,value) -> show a certain data, e.g. attrbute = first_name, value = 'riza' to find the record of student whose last name is riza. \n
-    student.birthdayThisMonth() -> show students that are going to have birthday this month. \n
-    student.orderByBirthday() -> show database order by birthday. \n`);
+student.add(firstname, lastname, gender, birthday, email, phone) -> to add a student record to the database. \n
+student.update(id, firstname, lastname, gender, birthday, email, phone) -> to update data in the student record. \n
+student.delete(id) -> delete data of the student. \n
+student.showTable() -> show the database. \n
+student.showName(name) -> show the data of some students with the same name (either last or first name). \n
+student.findAttribute(attribute,value) -> show a certain data, e.g. attrbute = first_name, value = 'riza' to find the record of student whose last name is riza. \n
+student.birthdayThisMonth() -> show students that are going to have birthday this month. \n
+student.orderByBirthday() -> show database order by birthday. \n`);
   }
 }
 
