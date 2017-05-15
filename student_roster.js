@@ -11,12 +11,12 @@ var Table = require('cli-table2');
 // instantiate
 var table = new Table({
     head: ['ID', 'FIRST NAME', 'LAST NAME', 'GENDER', 'BIRTDHDAY', 'EMAIL', 'PHONE']
-  , colWidths: [5, 15, 15, 15, 15, 35, 15]
+  , colWidths: [5, 15, 15, 5, 15, 25, 15]
 });
 
 var table3 = new Table({
-    head: ['ID', 'FIRST NAME', 'LAST NAME', 'GENDER', 'BIRTDHDAY', 'EMAIL', 'PHONE', 'NEW']
-  , colWidths: [5, 15, 15, 15, 15, 35, 15, 15]
+    head: ['ID', 'FIRST NAME', 'LAST NAME', 'GENDER', 'BIRTDHDAY', 'EMAIL', 'PHONE']
+  , colWidths: [5, 15, 15, 15, 15, 35, 15]
 });
 
 var table2 = new Table({
@@ -68,6 +68,7 @@ class Student {
           })
           console.log('\n');
           console.log(table.toString());
+          table.length = 0
         } else {
           console.log('failed: '+err);
         }
@@ -124,7 +125,7 @@ class Student {
             //console.log(`\nResult : ${value.first_name} | ${value.last_name}`);
           })
           console.log('\n');
-          console.log(table.toString());
+          console.log(table2.toString());
           //console.log('read data success!');
           //console.log(rows);
 
@@ -176,7 +177,7 @@ class Student {
             //console.log(`\nResult : ${value.first_name} | ${value.last_name}`);
           })
           console.log('\n');
-          console.log(table.toString());
+          console.log(table3.toString());
         } else {
           console.log("gagal : "+err);
         }
@@ -233,7 +234,6 @@ let replServer = repl.start({
   output : process.stdout
 
 })
-
 
 let run = new Student()
 replServer.context.help = run.help()
