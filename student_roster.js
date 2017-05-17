@@ -112,57 +112,73 @@ class Student{
   }
 
   birthdayStudent() {
-    let queryBirthdayBoy = `SELECT * FROM student`
+    // let queryBirthdayBoy = `SELECT * FROM student`
+    let tanggal = new Date();
+    let bulan = (tanggal.getMonth()) + 1
+    let bull = '';
+    if (bulan<10) {
+      bull = `0${bulan}`
+    }
+    let queryBirthdayBoy = `select * from student where strftime('%m', birthday) = '${bull}'`
+    console.log(bull)
     db.all(queryBirthdayBoy, function(err, rows){
             if (err){
               console.log('error')
             } else {
-              let ultah = rows.map(x => x.birthday.split('-'));
-              this.list = rows;
-              this.date = new Date();
-              let ultahboy = [];
-              this.month = (this.date.getMonth())+1;
-              for (let i=0;i<ultah.length;i++) {
-                if (ultah[i][1] == this.month) {
-                  ultahboy.push(this.list[i])
-                }
+              for (let i=0; i< rows.length;i++) {
+                console.log(`\n${i+1}. Nama : ${rows[i].firstname} ${rows[i].lastname}`)
+                console.log(`   TTL  : ${rows[i].birthday}`)
               }
-              if (ultahboy.length < 1) {
-                console.log('\nGa ada yang ulang tahun bulan ini :(')
-              } else {  console.log('\n\nMurid yang ulang tahun di bulan ini:\n')
-                for (let i = 0; i< ultahboy.length;i++) {
-                  console.log(`${i+1}. Nama : ${ultahboy[i].firstname} ${ultahboy[i].lastname}\n   TTL  : ${ultahboy[i].birthday}\n`)
-                }
-              }
+              // let ultah = rows.map(x => x.birthday.split('-'));
+              // this.list = rows;
+              // this.date = new Date();
+              // let ultahboy = [];
+              // this.month = (this.date.getMonth())+1;
+              // for (let i=0;i<ultah.length;i++) {
+              //   if (ultah[i][1] == this.month) {
+              //     ultahboy.push(this.list[i])
+              //   }
+              // }
+              // if (ultahboy.length < 1) {
+              //   console.log('\nGa ada yang ulang tahun bulan ini :(')
+              // } else {  console.log('\n\nMurid yang ulang tahun di bulan ini:\n')
+              //   for (let i = 0; i< ultahboy.length;i++) {
+              //     console.log(`${i+1}. Nama : ${ultahboy[i].firstname} ${ultahboy[i].lastname}\n   TTL  : ${ultahboy[i].birthday}\n`)
+              //   }
+              // }
             }
           })
   }
 
   sortbyBirthday() {
-    let query = `SELECT * FROM student`
+    let query = `SELECT * FROM student ORDER BY strftime('%m', birthday), strftime('%d', birthday) ASC`
     db.all(query, function(err, rows){
             if (err){
               console.log('error')
             } else {
-              let siswa = rows;
-              let ultahSiswa = rows.map(x => x.birthday.split('-').splice(1,2));
-              let penentu = ultahSiswa.map(x => {
-                let bulan = parseInt(x[0])*30;
-                let tanggal = bulan + parseInt(x[1]);
-                return tanggal;
-              })
-              for (let i = 0;i<siswa.length;i++) {
-                siswa[i].angkaUltah = penentu[i]
+              for (let i=0;i<rows.length;i++) {
+                console.log(`\n${i+1}. Nama : ${rows[i].firstname} ${rows[i].lastname}`)
+                console.log(`   TTL  : ${rows[i].birthday}`)
               }
-              siswa.sort((a,b)=>a.angkaUltah-b.angkaUltah);
-              let output = siswa.map(x => {
-                delete x.angkaUltah;
-                return x
-              })
-              console.log('\n\nDaftar siswa diurutkan dari tanggal ulang tahunnya!')
-              for (let i=0;i<output.length;i++) {
-                console.log(`\n${i+1}. ID       : ${rows[i].id}\n   Nama     : ${rows[i].firstname} ${rows[i].lastname}\n   Gender   : ${rows[i].gender}\n   TTL      : ${rows[i].birthday}\n   e-mail   : ${rows[i].email}\n   No. Telp : ${rows[i].phone}`);
-              }
+              // let siswa = rows;
+              // let ultahSiswa = rows.map(x => x.birthday.split('-').splice(1,2));
+              // let penentu = ultahSiswa.map(x => {
+              //   let bulan = parseInt(x[0])*30;
+              //   let tanggal = bulan + parseInt(x[1]);
+              //   return tanggal;
+              // })
+              // for (let i = 0;i<siswa.length;i++) {
+              //   siswa[i].angkaUltah = penentu[i]
+              // }
+              // siswa.sort((a,b)=>a.angkaUltah-b.angkaUltah);
+              // let output = siswa.map(x => {
+              //   delete x.angkaUltah;
+              //   return x
+              // })
+              // console.log('\n\nDaftar siswa diurutkan dari tanggal ulang tahunnya!')
+              // for (let i=0;i<output.length;i++) {
+              //   console.log(`\n${i+1}. ID       : ${rows[i].id}\n   Nama     : ${rows[i].firstname} ${rows[i].lastname}\n   Gender   : ${rows[i].gender}\n   TTL      : ${rows[i].birthday}\n   e-mail   : ${rows[i].email}\n   No. Telp : ${rows[i].phone}`);
+              // }
             }
           })
   }
@@ -175,7 +191,7 @@ class Student{
     console.log(`   ------> untuk merubah data siswa tertentu pada kategori tertentu.`)
     console.log(`\n[3] hapus('<id>')`)
     console.log(`   ------> untuk menghapus siswa dari daftar siswa.`)
-    console.log(`\n[4] list()`)
+    console.log(`\n[4] list_all()`)
     console.log(`   ------> untuk menampilkan seluruh daftar siswa.`)
     console.log(`\n[5] list_byName('<name>')`)
     console.log(`   ------> untuk menampilkan siswa yang memiliki nama sesuai dengan yang di cari.`)
